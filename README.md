@@ -8,7 +8,8 @@ The class script includes:
 
 The project includes:
  * A test range (textured using Kenney's Prototype Textures)
- * A player example scene and script
+ * A basic movement player example scene and script recreating the behavior of Godot's basic movment template for CharacterBody3Ds
+ * A smooth movement player example scene and script for more realistic behavior and movement
 ## Notes
  * The code does not particularly use anything specific from Godot 4.5, so it is possible to use the class for earlier versions.
  * The project uses Jolt
