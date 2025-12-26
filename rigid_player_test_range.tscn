@@ -1,9 +1,9 @@
 [gd_scene load_steps=24 format=3 uid="uid://bd60f1vx4xfj0"]
 
-[ext_resource type="Texture2D" uid="uid://bs7qqocpvi22d" path="res://assets/Kenney Prototype Textures/Vector/texture_01.svg" id="1_0olji"]
-[ext_resource type="Texture2D" uid="uid://b0j7mf4482dch" path="res://assets/Kenney Prototype Textures/PNG/Green/texture_01.png" id="2_sq72s"]
-[ext_resource type="Texture2D" uid="uid://dscye23lecps1" path="res://assets/Kenney Prototype Textures/PNG/Orange/texture_10.png" id="3_pld6y"]
-[ext_resource type="PackedScene" uid="uid://cqg8a8xr4qtwc" path="res://RigidCharacterBody3D/rigid_player.tscn" id="4_kh1tm"]
+[ext_resource type="Texture2D" uid="uid://bs7qqocpvi22d" path="res://assets/Kenney Prototype Textures/Vector/texture_01.svg" id="1_x1343"]
+[ext_resource type="Texture2D" uid="uid://b0j7mf4482dch" path="res://assets/Kenney Prototype Textures/PNG/Green/texture_01.png" id="2_15s2p"]
+[ext_resource type="Texture2D" uid="uid://dscye23lecps1" path="res://assets/Kenney Prototype Textures/PNG/Orange/texture_10.png" id="3_clh0d"]
+[ext_resource type="PackedScene" uid="uid://cqg8a8xr4qtwc" path="res://RigidCharacterBody3D/rigid_player.tscn" id="4_lav04"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gsbcx"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -25,7 +25,7 @@ size = Vector3(50, 1, 50)
 size = Vector3(50, 1, 50)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kh1tm"]
-albedo_texture = ExtResource("1_0olji")
+albedo_texture = ExtResource("1_x1343")
 uv1_triplanar = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pld6y"]
@@ -35,7 +35,7 @@ size = Vector3(5, 1, 20)
 size = Vector3(5, 1, 20)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h23h4"]
-albedo_texture = ExtResource("2_sq72s")
+albedo_texture = ExtResource("2_15s2p")
 uv1_triplanar = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qjitu"]
@@ -45,7 +45,7 @@ size = Vector3(5, 1, 5)
 size = Vector3(5, 1, 5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jhpim"]
-albedo_texture = ExtResource("2_sq72s")
+albedo_texture = ExtResource("2_15s2p")
 uv1_triplanar = true
 
 [sub_resource type="GDScript" id="GDScript_sq72s"]
@@ -73,7 +73,7 @@ func _physics_process(delta: float) -> void:
 [sub_resource type="BoxMesh" id="BoxMesh_h23h4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qjitu"]
-albedo_texture = ExtResource("3_pld6y")
+albedo_texture = ExtResource("3_clh0d")
 uv1_triplanar = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_enkhm"]
@@ -81,9 +81,9 @@ uv1_triplanar = true
 [sub_resource type="SphereMesh" id="SphereMesh_jhpim"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2f0si"]
-albedo_texture = ExtResource("3_pld6y")
+albedo_texture = ExtResource("3_clh0d")
 
-[node name="TestRange" type="Node3D"]
+[node name="RigidPlayerTestRange" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -514,5 +514,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 billboard = 1
 text = "100KG"
 
-[node name="RigidPlayer" parent="." instance=ExtResource("4_kh1tm")]
+[node name="RigidPlayer" parent="." instance=ExtResource("4_lav04")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 0)
