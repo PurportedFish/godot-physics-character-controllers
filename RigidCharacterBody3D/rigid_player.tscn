@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqg8a8xr4qtwc"]
+
+[ext_resource type="Script" uid="uid://dce7r8yxcj3kh" path="res://RigidCharacterBody3D/rigid_player.gd" id="1_dpg6o"]
+[ext_resource type="Curve" uid="uid://c67dbb7kpjtc5" path="res://assets/curves/boost_curve.tres" id="2_1qk3b"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1qk3b"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1qk3b"]
+
+[node name="RigidPlayer" type="RigidBody3D"]
+mass = 60.0
+script = ExtResource("1_dpg6o")
+boost_curve = ExtResource("2_1qk3b")
+metadata/_custom_type_script = "uid://bcw3k6sukem3t"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_1qk3b")
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="FloorSnapCast" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_1qk3b")
+target_position = Vector3(0, -0.7, 0)
