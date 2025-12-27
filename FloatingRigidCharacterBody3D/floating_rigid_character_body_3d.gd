@@ -5,6 +5,7 @@ extends RigidBody3D
 @export var shape_cast: ShapeCast3D
 @export var ride_spring_strength: float = 200.0
 @export var ride_spring_damper: float = 15.0
+@export var ride_height: float = 1.25
 @export_group("Floor", "floor")
 @export var floor_stop_on_slope: bool = true
 @export var floor_constant_speed: bool = false
@@ -19,7 +20,6 @@ var lateral_velocity: Vector3 = Vector3.ZERO:
 var target_velocity: Vector3 = Vector3.ZERO
 var acceleration: float = 15.0
 
-@onready var _ride_height: float = absf(shape_cast.target_position.y)
 
 var _platform_velocity: Vector3 = Vector3.ZERO
 var _floor_friction: float = 1.0
@@ -83,7 +83,7 @@ func try_float() -> void:
 			closest_collision_point = collision_point
 			closest_collision_distance = collision_distance
 	
-	var x: float = closest_collision_distance - _ride_height
+	var x: float = closest_collision_distance - ride_height
 	
 	var spring_force: float = -ride_spring_strength * x * mass
 	var damping_force: float = -ride_spring_damper * Vector3.UP.dot(linear_velocity)

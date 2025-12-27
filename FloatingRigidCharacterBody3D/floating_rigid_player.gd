@@ -39,8 +39,6 @@ func _physics_process(_delta: float) -> void:
 		target_velocity.z = 0.0
 	
 	move_and_slide()
-	
-	print(lateral_velocity.length())
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -55,7 +53,7 @@ func modify_move_force(move_force: Vector3) -> Vector3:
 		return move_force
 	
 	var curr_cast_height: float = shape_cast.global_position.distance_to(shape_cast.get_collision_point(0))
-	var ratio: float = abs(curr_cast_height - _prev_height) / _ride_height
+	var ratio: float = abs(curr_cast_height - _prev_height) / ride_height
 	_prev_height = curr_cast_height
 	return move_force * (1.0 - ratio)
 

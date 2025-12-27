@@ -6,10 +6,13 @@
 height = 1.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8u5lh"]
+radius = 0.3
 
 [node name="FloatingRigidPlayer" type="RigidBody3D" node_paths=PackedStringArray("shape_cast")]
+mass = 10.0
 script = ExtResource("1_b30f4")
 shape_cast = NodePath("ShapeCast3D")
+ride_spring_damper = 100.0
 metadata/_custom_type_script = "uid://1vnxh8ttc1cx"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -24,7 +27,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 3)
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 shape = SubResource("SphereShape3D_8u5lh")
-target_position = Vector3(0, -1.25, 0)
+target_position = Vector3(0, -1.45, 0)
 
 [node name="CapsuleTop" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
