@@ -2,6 +2,12 @@ extends FloatingRigidCharacterBody3D
 
 
 const MOUSE_SENS: float = 0.08
+const MAX_JUMP_BUFFER: int = 3
+const JUMP_VELOCITY: float = 5
+const WALK_SPEED: float = 3.0
+const RUN_SPEED: float = 5.0
+const GROUND_ACCEL: float = 15.0
+const AIR_ACCEL: float = 3.0
 
 var input_dir: Vector2 = Vector2.ZERO
 var speed: float = 3.0
@@ -11,6 +17,9 @@ var wants_to_jump: bool = false
 @onready var camera: Camera3D = $Body/Camera3D
 
 @onready var _prev_height: float = 0.0
+
+var _jump_frame_buffer: int = 0
+var _jump_applied: bool = false
 
 
 func _ready() -> void:
@@ -25,12 +34,26 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	detect_environment()
-	try_float()
+	
+	if wants_to_jump:
+		if is_on_floor() and not _jump_applied:
+			apply_central_impulse(mass * JUMP_VELOCITY * Vector3.UP)
+			_jump_applied = true
+			_jump_frame_buffer = 0
+		else:
+			_jump_frame_buffer += 1
+			if _jump_frame_buffer >= MAX_JUMP_BUFFER:
+				wants_to_jump = false
 	
 	input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var dir: Vector3 = (body.basis * Vector3(input_dir.x, 0.0, input_dir.y)).normalized()
 	
-	acceleration = 15.0
+	if is_on_floor():
+		try_float()
+		acceleration = GROUND_ACCEL
+	else:
+		acceleration = AIR_ACCEL
+		_jump_applied = false
 	if dir:
 		target_velocity.x = speed * dir.x
 		target_velocity.z = speed * dir.z
@@ -45,7 +68,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		body.rotate_y(-deg_to_rad(event.relative.x * MOUSE_SENS))
 		camera.rotate_x(-deg_to_rad(event.relative.y * MOUSE_SENS))
-		camera.rotation.x = clampf(camera.rotation.x, deg_to_rad(-89.0), deg_to_rad(90.0))
+		camera.rotation.x = clampf(camera.rotation.x, deg_to_rad(-90.0), deg_to_rad(90.0))
+	
+	if event.is_action_pressed("jump"):
+		wants_to_jump = true
 
 
 func modify_move_force(move_force: Vector3) -> Vector3:

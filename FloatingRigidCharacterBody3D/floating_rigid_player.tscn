@@ -12,7 +12,7 @@ radius = 0.3
 mass = 60.0
 script = ExtResource("1_b30f4")
 shape_cast = NodePath("ShapeCast3D")
-ride_spring_damper = 500.0
+ride_spring_damper = 1000.0
 metadata/_custom_type_script = "uid://1vnxh8ttc1cx"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -30,4 +30,3 @@ shape = SubResource("SphereShape3D_8u5lh")
 target_position = Vector3(0, -1.45, 0)
 
 [node name="CapsuleTop" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

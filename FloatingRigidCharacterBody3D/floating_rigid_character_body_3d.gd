@@ -19,7 +19,7 @@ var lateral_velocity: Vector3 = Vector3.ZERO:
 		return Vector3(linear_velocity.x, 0.0, linear_velocity.z)
 var target_velocity: Vector3 = Vector3.ZERO
 var acceleration: float = 15.0
-
+var curr_ride_height: float = ride_height
 
 var _platform_velocity: Vector3 = Vector3.ZERO
 var _floor_friction: float = 1.0
@@ -41,6 +41,8 @@ func detect_environment() -> void:
 	_platform_velocity = Vector3.ZERO
 	_highest_floor_normal = Vector3.ZERO
 	_is_on_floor = false
+	
+	curr_ride_height = ride_height
 	
 	var rigid_count: int = 0
 	
@@ -64,6 +66,10 @@ func detect_environment() -> void:
 		var contact_position: Vector3 = to_local(shape_cast.get_collision_point(i))
 		var contact_normal: Vector3 = shape_cast.get_collision_normal(i)
 		var contact_angle: float = acos(contact_normal.dot(up_direction))
+		var contact_distance_from_cast: float =  contact_position.distance_to(shape_cast.position) 
+		
+		if contact_distance_from_cast < curr_ride_height:
+			curr_ride_height = contact_distance_from_cast
 		
 		if _is_floor(contact_position, contact_angle):
 			_is_on_floor = true
@@ -151,4 +157,8 @@ func modify_drag_force(drag_force: Vector3) -> Vector3:
 
 
 func _is_floor(contact_position: Vector3, contact_angle: float) -> bool:
-	return contact_position.y <= floor_knee_height and contact_angle <= floor_max_angle
+	return (
+		contact_position.y <= floor_knee_height
+		and contact_angle <= floor_max_angle
+		and contact_position.distance_to(shape_cast.position) <= ride_height
+	)
